@@ -9,6 +9,7 @@
 //! LEON3 UART A Transmit FIFO is FULL
 #define LEON3_UART_TFF (0x200)
 
+//OK pero acostumbrate a usar -> en vez de (*  ).
 #define leon3_UART_TF_IS_FULL() ((*pLEON3_UART_REGS).Status & LEON3_UART_TFF)
 
 //Estructura de datos que permite acceder a los registros de la
@@ -28,6 +29,7 @@ struct UART_regs
 
 };
 
+//El casting (struct   UART_regs *) te permite eliminar el warning
 
 struct UART_regs * pLEON3_UART_REGS = 0x80000100;
 
@@ -41,6 +43,7 @@ int8_t leon3_putchar(char c)
 	} //Espera mientras la cola de transmisión esté llena
 
 	if(write_timeout < 0xAAAAA){
+		//OK pero acostumbrate a usar -> en vez de (*  ).
 		(*pLEON3_UART_REGS).Data = c;
 	}
 	return (write_timeout == 0xAAAAA);
